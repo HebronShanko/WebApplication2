@@ -10,46 +10,93 @@
         body {
             background-color: lightblue;
         }
+
+      #myContainer {
+        width: 400px;
+        height: 400px;
+        position: relative;
+        background: yellow;
+      }
+
+      #myAnimation {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        background-color: red;
+      }
+
+
     </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">WebApplication2</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - WebApplication2 - <a asp-area="" asp-page="/Privacy">Privacy</a>
+  <header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+      <div class="container">
+        <a class="navbar-brand" asp-area="" asp-page="/Index">WebApplication2</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+          <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+              <a class="nav-link text-light" asp-area="" asp-page="/Index">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" asp-area="" asp-page="/Privacy">Privacy</a>
+            </li>
+          </ul>
         </div>
-    </footer>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    <main role="main" class="pb-3">
+      @RenderBody()
+    </main>
+  </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+  <p>
+    <button onclick="myMove()">Click Me</button>
+  </p>
 
-    @RenderSection("Scripts", required: false)
+  <div id="myContainer">
+    <div id="myAnimation"></div>
+  </div>
+
+
+  <footer class="border-top footer text-muted">
+    <div class="container">
+      &copy; 2021 - WebApplication2 - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    </div>
+  </footer>
+
+
+  <script>
+    var id = null;
+    function myMove() {
+      var elem = document.getElementById("myAnimation");
+      var pos = 0;
+      clearInterval(id);
+      id = setInterval(frame, 10);
+      function frame() {
+        if (pos == 350) {
+          clearInterval(id);
+        } else {
+          pos++;
+          elem.style.top = pos + 'px';
+          elem.style.left = pos + 'px';
+        }
+      }
+    }
+  </script>
+
+
+  <script src="~/lib/jquery/dist/jquery.min.js"></script>
+  <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="~/js/site.js" asp-append-version="true"></script>
+
+  @RenderSection("Scripts", required: false)
+
 </body>
 </html>
